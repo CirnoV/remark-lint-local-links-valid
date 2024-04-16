@@ -49,7 +49,12 @@ const remarkLintLocalLinksValid = lintRule(
   }
 );
 const isLocalLink = (url) => {
-  return !url.includes(":");
+  try {
+    new URL(url);
+  } catch {
+    return true;
+  }
+  return false;
 };
 const resolveRedirect = (redirects, url) => {
   let resolved = url;
